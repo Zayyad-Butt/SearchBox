@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Search Box</string>
+    <string-array name="names">
+        <item>Name</item>
+        <item>CNIC</item>
+        <item>RollNo</item>
+        <item>Age</item>
+    </string-array>
+
+
+</resources>
