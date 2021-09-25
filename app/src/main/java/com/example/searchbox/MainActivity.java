@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
 
-    List<Student> allStudents;
+    List<Student> allStudents=new ArrayList<Student>();
 
     Button button;
     RecyclerView recycleView;
@@ -86,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
         cnic = findViewById(R.id.cnic);
         rollNo = findViewById(R.id.rollNo);
         recordLayout=findViewById(R.id.recordLayout);
+
 
         //getting control Buttons
 
@@ -162,6 +163,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void setRecordOnScreen(int index)
     {
+        index=index-1;
         Student s=allStudents.get(index);
         name.setText(s.getName());
         age.setText(String.valueOf(s.getAge()));
@@ -178,19 +180,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void showButtons(int size)
-    {
-        if(size>3)
-        {
-            size=3;
-        }
-        for(int i=1;i<=size;i++)
-        {
-            Button btn = new Button(this);
-            btn.setId(i);
-            btn.setText(i);
-        }
-    }
+
 
     private void RefreshData() {
 
@@ -200,9 +190,9 @@ public class MainActivity extends AppCompatActivity {
 
         if(allStudents.isEmpty())
         {
+            recordNumberTextView.setText("0/0");
             Toast.makeText(MainActivity.this,"No Record Found",Toast.LENGTH_SHORT).show();
             recordLayout.setVisibility(View.INVISIBLE);
-
         }
         else{
             currentRecord=1;
@@ -219,11 +209,13 @@ public class MainActivity extends AppCompatActivity {
     public void resetData(View view) {
         editText.setText("");
         recordLayout.setVisibility(View.INVISIBLE);
+        recordNumberTextView.setText("0/0");
     }
 
     public void GoToPreviousRecord(View view) {
         if(allStudents.isEmpty())
         {
+            recordNumberTextView.setText("0/0");
             Toast.makeText(MainActivity.this,"No Record Exists",Toast.LENGTH_SHORT).show();
             return;
         }
@@ -232,15 +224,20 @@ public class MainActivity extends AppCompatActivity {
             currentRecord=allStudents.size();
         }
         else{
-            currentRecord--;
+            currentRecord=currentRecord-1;
         }
+
         SetRecordNumber(currentRecord);
+        setRecordOnScreen(currentRecord);
+
     }
 
     public void GoToNextRecord(View view) {
         if(allStudents.isEmpty())
         {
+            recordNumberTextView.setText("0/0");
             Toast.makeText(MainActivity.this,"No Record Exists",Toast.LENGTH_SHORT).show();
+
             return;
         }
         if(currentRecord==allStudents.size())
@@ -249,15 +246,32 @@ public class MainActivity extends AppCompatActivity {
 
         }
         else{
-            currentRecord++;
+            currentRecord=currentRecord+1;
         }
-        SetRecordNumber(currentRecord);
 
+
+        SetRecordNumber(currentRecord);
+        setRecordOnScreen(currentRecord);
+
+    }
+
+    public void GoToRequiredRecord(View view)
+    {
+        int recNum=Integer.parseInt(recordNumByUser.getText().toString());
+        if(recNum>allStudents.size() || recNum<1)
+        {
+            Toast.makeText(MainActivity.this,"Record Number must be within Given Range",Toast.LENGTH_SHORT).show();
+        }
+        else{
+            currentRecord=recNum;
+            SetRecordNumber(recNum);
+            setRecordOnScreen(recNum);
+        }
     }
 
     public void SetRecordNumber(int r)
     {
-        String s=currentRecord+ "/" + allStudents.size();
+        String s=r+ "/" + allStudents.size();
         recordNumberTextView.setText(s);
     }
 }

@@ -196,7 +196,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="prev"
-            android:onClick="GoToNextRecord"
+            android:onClick="GoToPreviousRecord"
             />
 
 
@@ -205,7 +205,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="TextView" />
+            android:text="0/0"
+            android:textAlignment="center"
+            />
 
         <Button
             android:id="@+id/next"
@@ -213,7 +215,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="next"
-            android:onClick="GoToPreviousRecord"
+            android:onClick="GoToNextRecord"
             />
 
     </LinearLayout>
@@ -239,7 +241,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Go To" />
+            android:text="Go To"
+            android:onClick="GoToRequiredRecord"
+            />
     </LinearLayout>
 
 
