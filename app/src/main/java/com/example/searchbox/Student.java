@@ -1,18 +1,25 @@
 package com.example.searchbox;
 
+import android.graphics.Typeface;
+import android.text.Html;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.StyleSpan;
+
 public class Student {
     private String name;
     private String CNIC;
     private String rollNo;
+    private String img;
     private int age;
     private int id;
 
-    public Student(String name,int age, String CNIC, String rollNo,int id) {
+    public Student(String name,int age, String CNIC, String rollNo,String img) {
         this.name = name;
         this.CNIC = CNIC;
         this.rollNo = rollNo;
         this.age = age;
-        this.id=id;
+        this.img=img;
     }
     public int getID() {
         return id;
@@ -21,6 +28,13 @@ public class Student {
 
     public String getName() {
         return name;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+    public String getImg() {
+        return img;
     }
 
     public void setName(String name) {
@@ -50,11 +64,5 @@ public class Student {
     public void setAge(int age) {
         this.age = age;
     }
-    @Override
-    public String toString() {
-        return  "Name: " + name  +
-                ", Age: " + age +
-                ", CNIC: " + CNIC+
-                ", RollNo: "+rollNo;
-    }
+
 }
